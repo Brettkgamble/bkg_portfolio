@@ -35,8 +35,7 @@ console.log('Person', person)
           <div className="relative flex flex-col justify-center items-center py-8 w-3/5 mx-auto">
             <SanityImage
               asset={person.image}
-              // alt={title ?? "Blog post image"}
-              // fill
+              alt={person.name ?? "Blog post image"}
               width="300"
               height="300"
               priority={false}
