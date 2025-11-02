@@ -1,3 +1,4 @@
+import { bioBlock } from "./bioBlock";
 import { cta } from "./cta";
 import { faqAccordion } from "./faq-accordion";
 import { featuredBlog } from "./featuredBlog";
@@ -8,6 +9,7 @@ import { subscribeNewsletter } from "./subscribe-newsletter";
 
 export const pageBuilderBlocks = [
   hero,
+  bioBlock,
   cta,
   featuredBlog,
   featureCardsIcon,

@@ -32,6 +32,12 @@ export const author = defineType({
       },
     }),
     defineField({
+      name: 'introduction',
+      title: 'Introduction',
+      type: 'array',
+      of: [{ type: 'reference', to: {type: 'bioBlock'}}]
+    }),
+    defineField({
       name: "bio",
       type: "text",
       title: "Bio",
