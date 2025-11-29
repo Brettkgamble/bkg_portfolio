@@ -15,7 +15,7 @@ const serializers = {
       types: {
           value: (props) => {
               const style = props.value.style ;
-              
+              console.log("style:", style);
               if (style == 'h1') {
                   return(
                       <h1 className="text-4xl pb-4 font-bold">{props.children}</h1>
