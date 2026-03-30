@@ -5,6 +5,7 @@ import type { ComponentType } from "react";
 
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 
+import { BioBlock } from "./sections/bioBlock";
 import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeaturedBlog } from "./sections/featuredBlog";
@@ -28,6 +29,7 @@ type PageData = {
 };
 
 const BLOCK_COMPONENTS: Record<string, ComponentType<any>> = {
+  bioBlock: BioBlock,
   cta: CTABlock,
   faqAccordion: FaqAccordion,
   featuredBlog: FeaturedBlog,

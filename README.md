@@ -1,5 +1,5 @@
 # Todo's
-- /resume - add bio block as a pagebuilder block
+- /resume - March 30, 2026 I added a bioblock.  Now need to fill it in as well as the hero block
 - build out the author schema to include cv blocks based on the bioblock.
 - add skill block as a pagebuilder block
 
