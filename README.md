@@ -1,3 +1,9 @@
+# Todo's
+- /resume - add bio block as a pagebuilder block
+- build out the author schema to include cv blocks based on the bioblock.
+- add skill block as a pagebuilder block
+
+
 # Next.js Monorepo with Sanity CMS
 
 A modern, full-stack monorepo template built with Next.js App Router, Sanity CMS, Shadcn UI, and TurboRepo.

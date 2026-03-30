@@ -12,38 +12,46 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.1.0",
-    "@next/third-parties": "^15.4.2",
+    "@hookform/resolvers": "^5.2.2",
+    "@next/third-parties": "16.2.1",
     "@portabletext/react": "^4.0.3",
     "@react-email/components": "^0.0.36",
     "@react-email/img": "0.0.11",
-    "@sanity/asset-utils": "^2.2.1",
-    "@sanity/client": "^7.6.0",
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/visual-editing": "^2.15.0",
+    "@sanity/asset-utils": "^2.3.0",
+    "@sanity/client": "^7.20.0",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/visual-editing": "^2.15.4",
     "@workspace/ui": "workspace:*",
     "babel-plugin-react-compiler": "19.1.0-rc.2",
     "lucide-react": "0.522.0",
-    "next": "15.3.4",
+    "next": "16.2.1",
     "next-auth": "5.0.0-beta.28",
-    "next-sanity": "^9.12.0",
+    "next-sanity": "^9.12.3",
     "next-themes": "^0.4.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-hook-form": "^7.57.0",
-    "resend": "^4.5.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hook-form": "^7.72.0",
+    "resend": "^4.8.0",
     "schema-dts": "^1.1.5",
     "server-only": "^0.0.1",
-    "slugify": "^1.6.6",
-    "zod": "^3.25.49"
+    "slugify": "^1.6.8",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@types/node": "^24",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
+    "@types/node": "^24.12.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/typescript-config": "workspace:*",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.17"
+    "eslint": "^9.39.4",
+    "eslint-config-next": "16.2.1",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.2.14",
+      "@types/react-dom": "19.2.3"
+    }
   }
 }
