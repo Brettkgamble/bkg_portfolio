@@ -1,8 +1,8 @@
 # Todo's
-- /resume - March 30, 2026 I added a bioblock.  Now need to fill it in as well as the hero block
-- build out the author schema to include cv blocks based on the bioblock.
-- add skill block as a pagebuilder block
-
+- /resume - June 6, 2026 Added a 'resume' document which is a standalone entity.  Added a profile block to resume and need to 
+- get it onto the front end under the /cv introduction.  Can then move on to creating an 'executive strengths' block which
+- the resume can select from as an array and show an 'Executive Strengths' section on the /cv
+- Author can link to a 'resume'
 
 # Next.js Monorepo with Sanity CMS
 

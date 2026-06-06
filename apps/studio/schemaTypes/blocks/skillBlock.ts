@@ -1,9 +1,10 @@
 import {mediaAssetSource} from "sanity-plugin-media";
+import { defineField, defineType } from "sanity";
 
-export default {
+export const skillBlock = defineType({
     type: 'document',
-    name: 'skills',
-    title: 'Skills',
+    name: 'skillBlock',
+    title: 'Skill Block',
     fields: [
         {
             name: 'name',
@@ -25,12 +26,6 @@ export default {
           title: 'Description',
           type: 'array',
           of: [{ type: 'reference', to: {type: 'skillBlock'}}]
-        },
-         {
-          name: 'skillProficiency',
-          title: 'Skill Proficiency',
-          type: 'array',
-          of: [{ type: 'reference', to: {type: 'skillProficiency'}}]
         },
         {
           name: 'image',
@@ -64,4 +59,4 @@ export default {
           }
       } ,
     ]
-}
+})
