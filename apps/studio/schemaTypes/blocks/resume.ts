@@ -15,18 +15,6 @@ export const resume = defineType({
       validation: (Rule) => Rule.required().error("Author name is required"),
     }),
     defineField({
-      name: 'profile',
-      title: 'Profile',
-      type: 'array',
-      of: [{ type: 'reference', to: {type: 'bioBlock'}}]
-    }),
-    defineField({
-      name: 'skills',
-      title: 'Skills',
-      type: 'array',
-      of: [{ type: 'reference', to: {type: 'skillBlock'}}]
-    }),
-    defineField({
           name: "Author",
           type: "array",
           title: "Author",
@@ -53,7 +41,13 @@ export const resume = defineType({
             Rule.min(1),
             Rule.unique(),
           ],
-        })
+        }),
+        defineField({
+      name: 'skills',
+      title: 'Skills',
+      type: 'array',
+      of: [{ type: 'reference', to: {type: 'skillBlock'}}]
+    }),
   ],
   preview: {
     select: {
