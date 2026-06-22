@@ -2,7 +2,7 @@
 - /resume - June 18, 2026.  Working on adding an author to this page /resume.  An author can have one or more resumes.
 
 npx sanity schema extract
-sanity typegen generate
+sanity typegen generate - deprecated to sanity.cli
 
 # Next.js Monorepo with Sanity CMS
 

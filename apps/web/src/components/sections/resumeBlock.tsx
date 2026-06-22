@@ -6,7 +6,7 @@ import { RichText } from "../richtext";
 import { SanityButtons } from "../sanity-buttons";
 import { SanityImage } from "../sanity-image";
 
-type HeroBlockProps = PagebuilderType<"hero">;
+type ResumeBlockProps = PagebuilderType<"resume">;
 
 export function ResumeBlock({
   title,
@@ -14,7 +14,7 @@ export function ResumeBlock({
   badge,
   image,
   richText,
-}: HeroBlockProps) {
+}: ResumeBlockProps) {
   return (
     <section id="hero" className="mt-4 md:my-16">
       <div className="container mx-auto px-4 md:px-6">
