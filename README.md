@@ -1,8 +1,8 @@
 # Todo's
-- /resume - June 6, 2026 Added a 'resume' document which is a standalone entity.  Added a profile block to resume and need to 
-- get it onto the front end under the /cv introduction.  Can then move on to creating an 'executive strengths' block which
-- the resume can select from as an array and show an 'Executive Strengths' section on the /cv
-- Author can link to a 'resume'
+- /resume - June 18, 2026.  Working on adding an author to this page /resume.  An author can have one or more resumes.
+
+npx sanity schema extract
+sanity typegen generate
 
 # Next.js Monorepo with Sanity CMS
 

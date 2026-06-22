@@ -1,3 +1,4 @@
+import { author } from './author';
 import { bioBlock } from "./bioBlock";
 import { cta } from "./cta";
 import { faqAccordion } from "./faq-accordion";
@@ -5,10 +6,12 @@ import { featuredBlog } from "./featuredBlog";
 import { featureCardsIcon } from "./feature-cards-icon";
 import { hero } from "./hero";
 import { imageLinkCards } from "./image-link-cards";
+import { resume } from './resume';
 import { skillBlock } from "./skillBlock";
 import { subscribeNewsletter } from "./subscribe-newsletter";
 
 export const pageBuilderBlocks = [
+  author,
   hero,
   bioBlock,
   cta,
@@ -16,6 +19,7 @@ export const pageBuilderBlocks = [
   featureCardsIcon,
   faqAccordion,
   imageLinkCards,
+  resume,
   subscribeNewsletter,
   skillBlock,
 ];

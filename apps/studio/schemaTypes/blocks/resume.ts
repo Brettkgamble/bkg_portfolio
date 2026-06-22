@@ -1,5 +1,5 @@
 import { UserIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
+import { defineField, defineType, defineArrayMember } from "sanity";
 
 export const resume = defineType({
   name: "resume",
@@ -26,6 +26,34 @@ export const resume = defineType({
       type: 'array',
       of: [{ type: 'reference', to: {type: 'skillBlock'}}]
     }),
+    defineField({
+          name: "Author",
+          type: "array",
+          title: "Author",
+          description: "The person associated with this resume",
+          of: [
+            defineArrayMember({
+              type: "reference",
+              to: [
+                {
+                  type: "author",
+                  options: {
+                    disableNew: true,
+                  },
+                },
+              ],
+              options: {
+                disableNew: true,
+              },
+            }),
+          ],
+          validation: (Rule) => [
+            Rule.required(),
+            Rule.max(1),
+            Rule.min(1),
+            Rule.unique(),
+          ],
+        })
   ],
   preview: {
     select: {
