@@ -9,12 +9,15 @@ import { SanityImage } from "../sanity-image";
 type ResumeBlockProps = PagebuilderType<"resume">;
 
 export function ResumeBlock({
-  title,
+  name,
+  author,
   buttons,
   badge,
   image,
   richText,
 }: ResumeBlockProps) {
+  const authorName = author?.[0]?.name;
+
   return (
     <section id="hero" className="mt-4 md:my-16">
       <div className="container mx-auto px-4 md:px-6">
@@ -23,14 +26,13 @@ export function ResumeBlock({
             <Badge variant="secondary">{badge}</Badge>
             <div className="grid gap-4">
               <h1 className="text-4xl lg:text-6xl font-semibold text-balance">
-                {title} Resume Block Working here!
+                {name} {authorName}
               </h1>
               <RichText
                 richText={richText}
                 className="text-base md:text-lg font-normal"
               />
             </div>
-
             <SanityButtons
               buttons={buttons}
               buttonClassName="w-full sm:w-auto"

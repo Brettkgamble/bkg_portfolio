@@ -11,11 +11,12 @@ export const resume = defineType({
       name: "name",
       type: "string",
       title: "Name",
-      description: "The full name of the person who wrote the content",
-      validation: (Rule) => Rule.required().error("Author name is required"),
+      description: "The name of the person whose resume this is",
+      validation: (Rule) => Rule.required().error("Name is required"),
     }),
+    
     defineField({
-          name: "Author",
+          name: "author",
           type: "array",
           title: "Author",
           description: "The person associated with this resume",

@@ -174,6 +174,24 @@ const featuredBlogBlock = /* groq */ `
   }
 `;
 
+const resumeBlock = /* groq */ `
+  _type == "resume" => {
+    ...,
+    "author": author[]->{
+      _id,
+      name,
+      position,
+      ${imageFragment}
+    },
+    "skills": skills[]->{
+      _id,
+      name,
+      "slug": slug.current,
+      ${imageFragment}
+    },
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
@@ -184,7 +202,8 @@ const pageBuilderFragment = /* groq */ `
     ${featuredBlogBlock},
     ${featureCardsIconBlock},
     ${subscribeNewsletterBlock},
-    ${imageLinkCardsBlock}
+    ${imageLinkCardsBlock},
+    ${resumeBlock}
   }
 `;
 
