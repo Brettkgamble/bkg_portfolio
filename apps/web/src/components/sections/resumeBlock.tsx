@@ -26,7 +26,7 @@ export function ResumeBlock({
             <Badge variant="secondary">{badge}</Badge>
             <div className="grid gap-4">
               <h1 className="text-4xl lg:text-6xl font-semibold text-balance">
-                {name} {authorName}
+                 {authorName}
               </h1>
               <RichText
                 richText={richText}
