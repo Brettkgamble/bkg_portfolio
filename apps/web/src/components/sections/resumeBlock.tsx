@@ -6,7 +6,10 @@ import { RichText } from "../richtext";
 import { SanityButtons } from "../sanity-buttons";
 import { SanityImage } from "../sanity-image";
 
+import { BioBlock } from "./bioBlock";
+
 type ResumeBlockProps = PagebuilderType<"resume">;
+type BioBlockProps = { author?: ResumeBlockProps["author"] };
 
 export function ResumeBlock({
   name,
@@ -25,9 +28,7 @@ export function ResumeBlock({
           <div className="grid h-full grid-rows-[auto_1fr_auto] gap-4 items-center justify-items-center text-center lg:items-start lg:justify-items-start lg:text-left">
             <Badge variant="secondary">{badge}</Badge>
             <div className="grid gap-4">
-              <h1 className="text-4xl lg:text-6xl font-semibold text-balance">
-                 {authorName}
-              </h1>
+              <BioBlock author={author} />
               <RichText
                 richText={richText}
                 className="text-base md:text-lg font-normal"
