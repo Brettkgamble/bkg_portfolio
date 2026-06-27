@@ -6,15 +6,48 @@ import { RichText } from "../richtext";
 import { SanityButtons } from "../sanity-buttons";
 import { SanityImage } from "../sanity-image";
 
-// type BioBlockProps = PagebuilderType<"bioBlock">;
 type ResumeBlockProps = PagebuilderType<"resume">;
 type BioBlockProps = { author?: ResumeBlockProps["author"] };
 
 export function BioBlock({
  author,
 }: BioBlockProps) {
-  const authorName = author?.[0]?.name
+  const authorName = author?.[0]?.name;
+  const authorImage = author?.[0]?.image;
+  const authorBio = author?.[0]?.introduction?.[0]?.bio;
+
+
   return (
+    <div className="flex flex-wrap">
+      <div className="hidden flex-none p-2 sm:flex sm:w-1/12 md:w-1/6"></div>
+      <div className=" flex-none pt-8">
+        <h1 className="pt-4 font-roboto-600 font-bold text-xl lg:text-3xl w-full uppercase
+            text-start tracking-widest  ">{authorName}
+            <hr className="mt-2 w-full h-2 dark:bg-blue-700"/>
+        </h1>
+        <div className="relative flex flex-col justify-center items-center py-8 w-full mx-auto">
+          <SanityImage
+            asset={authorImage}
+            alt={authorImage ?? "Blog post image"}
+            width="300"
+            height="300"
+            priority={false}
+            loading="lazy"
+            quality={100}
+            className="mx-auto w-3/5 rounded-full "
+          />
+        </div>
+      </div>
+      <div className="w-full flex-none pt-16 px-8 md:w-2/4 lg:w-2/4">
+          <div className=" font-roboto-400 text-white  text-justify md:pt-16">
+            <RichText richText={authorBio} />
+          </div>
+      </div>
+    </div>
+  )
+}
+
+/*
   <section id="bio" className="bg-white pb-32">
     <div className="flex flex-wrap">
       <div className="hidden flex-none p-2 sm:flex sm:w-1/12 md:w-1/6"></div>
@@ -24,7 +57,7 @@ export function BioBlock({
         <hr className="mt-2 w-64 h-2 dark:bg-blue-700"/>
         </h1>
         <div className="relative flex flex-col justify-center py-8 sm:w-4/5 ">
-          {/* {image && (
+           {image && (
             <div className="h-96 w-full">
               <SanityImage
                 asset={image}
@@ -36,17 +69,17 @@ export function BioBlock({
                 className="max-h-96 w-full rounded-3xl object-cover"
               />
             </div>
-          )} */}
+          )}
           <div className="flex pl-8 flex-col justify-center pt-8 text-black text-sm hover:text-blue-700">
             <ol >
                 <li key={'linkedinUrl'} >
-                    {/* <a
+                    { <a
                         href={person.linkedinurl.href.valueOf()}
                         target="_blank"
                         rel="noreferrer"
                     >
                         <FaLinkedinIn className="text-white bg-linkedin rounded-sm" size={24} style={{paddingTop: "2"}}/>
-                    </a> */}
+                    </a> }
                 </li>
             </ol>
         </div>
@@ -56,7 +89,7 @@ export function BioBlock({
           <h1 className="pt-4 pl-4 font-roboto-600 font-bold text-black text-3xl w-full uppercase text-start tracking-widest">
           Stuff goes here
         </h1>
-          {/* <section>
+           <section>
               <BlockContent
                   style={{fontSize: "3rem"}}
                   blocks={person.introduction[0].bio}
@@ -65,7 +98,7 @@ export function BioBlock({
                   dataset={client.dataset}
                   imageOptions={{w: 500, h: 440, fit: 'max'}}
               />
-          </section> */}
+          </section>
         </div>
       </div>
       <div className="hidden flex-none p-2 sm:flex sm:w-1/12 md:w-1/6"></div>
@@ -83,4 +116,4 @@ export function BioBlock({
   </section>
    
   );
-}
+}*/
