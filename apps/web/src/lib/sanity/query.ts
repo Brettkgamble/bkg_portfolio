@@ -181,7 +181,15 @@ const resumeBlock = /* groq */ `
       _id,
       name,
       position,
-      ${imageFragment}
+      ${imageFragment},
+      "introduction": introduction[]->{
+        _id,
+        name,
+        "bio": bio[]{
+          ...,
+          ${markDefsFragment}
+        }
+      }
     },
     "skills": skills[]->{
       _id,

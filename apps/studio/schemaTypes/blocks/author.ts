@@ -11,13 +11,20 @@ export const author = defineType({
       name: "name",
       type: "string",
       title: "Name",
-      description: "The full name of the person who wrote the content",
+      description: "Full name",
       validation: (Rule) => Rule.required().error("Author name is required"),
+    }),
+    defineField({
+      name: "position",
+      type: "string",
+      title: "Position",
+      description: "Current position",
+      validation: (Rule) => Rule.required().error("Position is required"),
     }),
     defineField({
       name: "image",
       type: "image",
-      title: "Image",
+      title: "Bio Portratit",
       description:
         "A photo of the author that will appear next to their articles",
       options: {
@@ -26,7 +33,7 @@ export const author = defineType({
     }),
     defineField({
       name: 'introduction',
-      title: 'Introduction',
+      title: 'Bio',
       type: 'array',
       of: [{ type: 'reference', to: {type: 'bioBlock'}}]
     }),
@@ -47,13 +54,10 @@ export const author = defineType({
     prepare: ({ title, position, media, bio }) => {
       // Create a playful subtitle with emojis
       const positionInfo = position ? `💼 ${position}` : "🎭 Mystery Writer";
-      const bioPreview = bio
-        ? `📝 ${bio.substring(0, 20)}${bio.length > 20 ? "..." : ""}`
-        : "📝 No bio yet";
 
       return {
-        title: `✍️ ${title || "Unnamed Author"}`,
-        subtitle: `${positionInfo} | ${bioPreview}`,
+        title: `${title || "Unnamed Author"}`,
+        subtitle: `${positionInfo}`,
         media,
       };
     },
