@@ -8,6 +8,8 @@ import { hero } from "./hero";
 import { imageLinkCards } from "./image-link-cards";
 import { resume } from './resume';
 import { skillBlock } from "./skillBlock";
+import { skillProficiency } from "./skillProficiency";
+import { skills } from "./skills";
 import { subscribeNewsletter } from "./subscribe-newsletter";
 
 export const pageBuilderBlocks = [
@@ -22,4 +24,6 @@ export const pageBuilderBlocks = [
   resume,
   subscribeNewsletter,
   skillBlock,
+  skillProficiency,
+  skills,
 ];
