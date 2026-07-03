@@ -7,9 +7,8 @@ import { featureCardsIcon } from "./feature-cards-icon";
 import { hero } from "./hero";
 import { imageLinkCards } from "./image-link-cards";
 import { resume } from './resume';
-import { skillBlock } from "./skillBlock";
-import { skillProficiency } from "./skillProficiency";
 import { skills } from "./skills";
+import { skillsList } from "./skillsList";
 import { subscribeNewsletter } from "./subscribe-newsletter";
 
 export const pageBuilderBlocks = [
@@ -23,7 +22,6 @@ export const pageBuilderBlocks = [
   imageLinkCards,
   resume,
   subscribeNewsletter,
-  skillBlock,
-  skillProficiency,
   skills,
+  skillsList,
 ];

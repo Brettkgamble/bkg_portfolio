@@ -44,10 +44,10 @@ export const resume = defineType({
           ],
         }),
         defineField({
-      name: 'skills',
-      title: 'Skills',
-      type: 'array',
-      of: [{ type: 'reference', to: {type: 'skillBlock'}}]
+          name: 'skills',
+          title: 'Skills',
+          type: 'array',
+          of: [{ type: 'reference', to: {type: 'skillsList'}}]
     }),
   ],
   preview: {
