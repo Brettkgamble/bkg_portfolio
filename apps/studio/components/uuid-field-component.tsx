@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { set } from 'sanity';
-import { Button, Card, Stack, Text } from '@sanity/ui';
+import { Button, Card, Code, Stack, Text } from '@sanity/ui';
 import type { StringInputProps } from 'sanity';
 
 export default function UuidFieldComponent(props: StringInputProps) {
@@ -32,9 +32,7 @@ export default function UuidFieldComponent(props: StringInputProps) {
         
         {value ? (
           <Card padding={2} radius={1} tone="default" border>
-            <Text font="mono" size={1}>
-              {value}
-            </Text>
+            <Code size={1}>{value}</Code>
           </Card>
         ) : (
           <Card padding={2} radius={1} tone="caution" border>

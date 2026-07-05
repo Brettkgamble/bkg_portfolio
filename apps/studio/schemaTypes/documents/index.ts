@@ -1,4 +1,4 @@
-// import { author } from "../blocks/author";
+import { author } from "../blocks/author";
 import { blog } from "./blog";
 import { blogIndex } from "./blog-index";
 import { categoryType } from "./categories";
@@ -15,4 +15,4 @@ import { settings } from "./settings";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [blog, categoryType, customer, job, metals, page, process, faq, ...singletons];
+export const documents = [author, blog, categoryType, customer, job, metals, page, process, faq, ...singletons];

@@ -13,6 +13,7 @@ import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
 import { ImageLinkCards } from "./sections/image-link-cards";
 import { ResumeBlock } from "./sections/resumeBlock";
+import { SkillsList } from "./sections/skillsList";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
 
 type PageBlock = any;
@@ -37,6 +38,7 @@ const BLOCK_COMPONENTS: Record<string, ComponentType<any>> = {
   hero: HeroBlock,
   featureCardsIcon: FeatureCardsWithIcon,
   resume: ResumeBlock,
+  skillsList: SkillsList,
   subscribeNewsletter: SubscribeNewsletter,
   imageLinkCards: ImageLinkCards,
 } as const;

@@ -1,4 +1,3 @@
-import { author } from './author';
 import { bioBlock } from "./bioBlock";
 import { cta } from "./cta";
 import { faqAccordion } from "./faq-accordion";
@@ -12,7 +11,6 @@ import { skillsList } from "./skillsList";
 import { subscribeNewsletter } from "./subscribe-newsletter";
 
 export const pageBuilderBlocks = [
-  author,
   hero,
   bioBlock,
   cta,
