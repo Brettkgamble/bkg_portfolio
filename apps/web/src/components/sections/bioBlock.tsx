@@ -32,7 +32,7 @@ export function BioBlock({ author }: BioBlockProps) {
         )}
       </aside>
 
-      <div className="text-justify">
+      <div className="text-justify md:mt-16">
         <RichText richText={authorBio} />
       </div>
     </div>

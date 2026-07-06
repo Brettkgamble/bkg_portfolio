@@ -741,36 +741,6 @@
     }
   },
   {
-    "type": "type",
-    "name": "skillsList.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "skillsList"
-    }
-  },
-  {
     "name": "resume",
     "type": "document",
     "attributes": {
@@ -850,7 +820,7 @@
             },
             "rest": {
               "type": "inline",
-              "name": "skillsList.reference"
+              "name": "skills.reference"
             }
           }
         },
@@ -2503,7 +2473,7 @@
                     },
                     "rest": {
                       "type": "inline",
-                      "name": "skillsList.reference"
+                      "name": "skills.reference"
                     }
                   }
                 },

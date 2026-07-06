@@ -193,9 +193,9 @@ const resumeBlock = /* groq */ `
     },
     "skills": skills[]->{
       _id,
-      name,
-      "slug": slug.current,
-      ${imageFragment}
+      title,
+      description,
+      proficiency
     },
   }
 `;

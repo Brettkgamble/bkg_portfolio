@@ -46,8 +46,9 @@ export const resume = defineType({
         defineField({
           name: 'skills',
           title: 'Skills',
+          description: 'The individual skills to display on this resume',
           type: 'array',
-          of: [{ type: 'reference', to: {type: 'skillsList'}}]
+          of: [defineArrayMember({ type: 'reference', to: { type: 'skills' } })],
     }),
   ],
   preview: {
