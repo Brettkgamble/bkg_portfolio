@@ -1,10 +1,12 @@
 import type { PagebuilderType } from "@/types";
 
+import { SkillsModal, type Skill } from "../modals/skillsModal";
+
 type ResumeBlockProps = PagebuilderType<"resume">;
 type SkillsListProps = { skills?: ResumeBlockProps["skills"] };
 
 export function SkillsList({ skills }: SkillsListProps) {
-  const individualSkills = skills ?? [];
+  const individualSkills: Skill[] = skills ?? [];
 
   if (individualSkills.length === 0) return null;
 
@@ -17,21 +19,11 @@ export function SkillsList({ skills }: SkillsListProps) {
         <hr className="mt-2 h-1 w-full border-0 bg-foreground/20 dark:bg-blue-700" />
       </aside>
 
-      <ul className="grid gap-3 md:mt-16">
-        {individualSkills.map((skill: any, index: number) => (
-          <li
-            key={`${skill?._id ?? "skill"}-${index}`}
-            className="flex items-center justify-between gap-4 border-b border-foreground/10 pb-2"
-          >
-            <span className="font-medium">{skill?.title}</span>
-            {skill?.proficiency && (
-              <span className="text-sm uppercase tracking-wide text-foreground/60">
-                {skill.proficiency}
-              </span>
-            )}
-          </li>
+      <div className="flex flex-wrap gap-2 md:mt-4">
+        {individualSkills.map((skill, index) => (
+          <SkillsModal key={`${skill?._id ?? "skill"}-${index}`} skill={skill} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
