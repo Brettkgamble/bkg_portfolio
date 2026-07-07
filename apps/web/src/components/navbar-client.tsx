@@ -32,7 +32,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 
 import { Logo } from "./logo";
-import { ModeToggle } from "./mode-toggle";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
 interface MenuItem {
@@ -303,7 +302,6 @@ export function DesktopNavbar({
       </div>
 
       <div className="justify-self-end flex items-center gap-4">
-        <ModeToggle />
         <SanityButtons
           buttons={buttons ?? []}
           className="flex items-center gap-4"

@@ -13,8 +13,6 @@ import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
 import { PreviewBar } from "@/components/preview-bar";
 import { SanityLive } from "@/lib/sanity/live";
 
-import { Providers } from "../components/providers";
-
 const fontGeist = Geist({
   subsets: ["latin"],
   variable: "--font-geist",
@@ -37,28 +35,26 @@ export default async function RootLayout({
   preconnect("https://cdn.sanity.io");
   prefetchDNS("https://cdn.sanity.io");
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <body
         className={`${fontGeist.variable} ${fontMono.variable} font-geist antialiased`}
       >
-        <Providers>
-          <Suspense fallback={<NavbarSkeleton />}>
-            <NavbarServer />
-          </Suspense>
-          {children}
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID ?? ""} />
-          <Suspense fallback={<FooterSkeleton />}>
-            <FooterServer />
-          </Suspense>
-          <SanityLive />
-          <CombinedJsonLd includeWebsite includeOrganization />
-          {(await draftMode()).isEnabled && (
-            <>
-              <PreviewBar />
-              <VisualEditing />
-            </>
-          )}
-        </Providers>
+        <Suspense fallback={<NavbarSkeleton />}>
+          <NavbarServer />
+        </Suspense>
+        {children}
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID ?? ""} />
+        <Suspense fallback={<FooterSkeleton />}>
+          <FooterServer />
+        </Suspense>
+        <SanityLive />
+        <CombinedJsonLd includeWebsite includeOrganization />
+        {(await draftMode()).isEnabled && (
+          <>
+            <PreviewBar />
+            <VisualEditing />
+          </>
+        )}
       </body>
     </html>
   );
