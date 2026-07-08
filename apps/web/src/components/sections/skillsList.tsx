@@ -19,7 +19,7 @@ export function SkillsList({ skills }: SkillsListProps) {
         <hr className="mt-2 h-1 w-full border-0 bg-foreground/20 dark:bg-blue-700" />
       </aside>
 
-      <div className="flex flex-wrap gap-2 md:mt-4">
+      <div className="flex flex-wrap gap-2 md:mt-16">
         {individualSkills.map((skill, index) => (
           <SkillsModal key={`${skill?._id ?? "skill"}-${index}`} skill={skill} />
         ))}
