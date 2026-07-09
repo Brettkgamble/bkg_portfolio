@@ -44,11 +44,20 @@ export const resume = defineType({
           ],
         }),
         defineField({
-          name: 'skills',
-          title: 'Skills',
-          description: 'The individual skills to display on this resume',
+          name: 'skillGroups',
+          title: 'Skill Groups',
+          description:
+            'Groups of skills (e.g. Languages, Frameworks, Tools) to display on this resume',
           type: 'array',
-          of: [defineArrayMember({ type: 'reference', to: { type: 'skills' } })],
+          of: [
+            defineArrayMember({
+              type: 'reference',
+              to: [{ type: 'skillsList' }],
+              options: { disableNew: true },
+            }),
+          ],
+          validation: (Rule) =>
+            Rule.required().min(1).error('Add at least one skill group'),
     }),
   ],
   preview: {

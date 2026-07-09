@@ -12,7 +12,9 @@ import { navbar } from "./navbar";
 import { page } from "./page";
 import { process } from "./process";
 import { settings } from "./settings";
+import { skills } from "../blocks/skills";
+import { skillsList } from "../blocks/skillsList";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [author, blog, categoryType, customer, job, metals, page, process, faq, ...singletons];
+export const documents = [author, blog, categoryType, customer, job, metals, page, process, faq, skills, skillsList, ...singletons];

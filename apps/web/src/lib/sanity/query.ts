@@ -191,11 +191,16 @@ const resumeBlock = /* groq */ `
         }
       }
     },
-    "skills": skills[]->{
+    "skillGroups": skillGroups[]->{
       _id,
       title,
       description,
-      proficiency
+      "skills": skills[]->{
+        _id,
+        title,
+        description,
+        proficiency
+      }
     },
   }
 `;

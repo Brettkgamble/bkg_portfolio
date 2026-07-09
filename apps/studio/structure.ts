@@ -12,6 +12,7 @@ import {
   PanelTopDashedIcon,
   Settings2,
   User,
+  Wrench,
 } from "lucide-react";
 import type {
   StructureBuilder,
@@ -136,6 +137,8 @@ export const structure = (
         icon: MessageCircleQuestion,
       }),
       createList({ S, type: "author", title: "Authors", icon: User }),
+      createList({ S, type: "skillsList", title: "Skill Groups", icon: Wrench }),
+      createList({ S, type: "skills", title: "Skills", icon: Wrench }),
       S.divider(),
       S.listItem()
         .title("Site Configuration")
