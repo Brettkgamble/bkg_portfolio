@@ -3814,7 +3814,8 @@
       "description": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
+          "type": "inline",
+          "name": "richText"
         },
         "optional": true
       },

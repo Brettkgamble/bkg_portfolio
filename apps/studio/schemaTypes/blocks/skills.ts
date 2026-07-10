@@ -15,7 +15,8 @@ export const skills = defineType({
       defineField({
         name: 'description',
         title: 'Description',
-        type: 'text'
+        type: 'richText',
+        description: 'A formatted description of this skill',
       }),
       defineField({
         name: 'proficiency',

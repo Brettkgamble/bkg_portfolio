@@ -198,7 +198,10 @@ const resumeBlock = /* groq */ `
       "skills": skills[]->{
         _id,
         title,
-        description,
+        "description": description[]{
+          ...,
+          ${markDefsFragment}
+        },
         proficiency
       }
     },

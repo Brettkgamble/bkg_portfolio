@@ -10,10 +10,12 @@ import {
 } from "@workspace/ui/components/dialog";
 import { stegaClean } from "next-sanity";
 
+import { RichText } from "../richtext";
+
 export type Skill = {
   _id?: string;
   title?: string | null;
-  description?: string | null;
+  description?: unknown;
   proficiency?: string | null;
 };
 
@@ -78,9 +80,10 @@ export function SkillsModal({ skill }: { skill: Skill }) {
         )}
 
         {skill.description && (
-          <p className="whitespace-pre-line text-base leading-7 text-white/80">
-            {skill.description}
-          </p>
+          <RichText
+            richText={skill.description}
+            className="prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white prose-li:text-white/80 prose-strong:text-white"
+          />
         )}
       </DialogContent>
     </Dialog>
