@@ -72,7 +72,7 @@ export function SkillsList({ skillGroups }: SkillsListProps) {
         <hr className="mt-2 h-1 w-full border-0 bg-foreground/20 dark:bg-blue-700" />
       </aside>
 
-      <Accordion type="multiple" defaultValue={[firstValue]} className="w-full">
+      <Accordion type="multiple" defaultValue={[firstValue]} className="w-full md:mt-12">
         {groups.map((group, index) => {
           const value = group?._id ?? `group-${index}`;
           const count = group?.skills?.length ?? 0;

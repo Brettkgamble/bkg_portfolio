@@ -34,15 +34,14 @@ export function proficiencyColor(proficiency?: string | null) {
   return PROFICIENCY_COLOR[key] ?? DEFAULT_COLOR;
 }
 
-function ProficiencyBadge({ proficiency }: { proficiency?: string | null }) {
+function ProficiencyLabel({ proficiency }: { proficiency?: string | null }) {
   const clean = stegaClean(proficiency);
   if (!clean) return null;
-  const color = proficiencyColor(proficiency);
   const label = clean.charAt(0).toUpperCase() + clean.slice(1);
   return (
     <span
-      className="inline-flex items-center rounded-md border-2 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-gray-900"
-      style={{ borderColor: color, backgroundColor: `${color}1f` }}
+      className="text-xs font-semibold uppercase tracking-wide"
+      style={{ color: proficiencyColor(proficiency) }}
     >
       {label}
     </span>
@@ -51,8 +50,6 @@ function ProficiencyBadge({ proficiency }: { proficiency?: string | null }) {
 
 export function SkillsModal({ skill }: { skill: Skill }) {
   if (!skill?.title) return null;
-
-  const color = proficiencyColor(skill.proficiency);
 
   return (
     <Dialog>
@@ -63,15 +60,11 @@ export function SkillsModal({ skill }: { skill: Skill }) {
         {skill.title}
       </DialogTrigger>
 
-      <DialogContent
-        className="border-2 bg-white text-gray-900"
-        style={{
-          borderColor: color,
-          boxShadow: `0 0 40px -6px ${color}, 0 0 16px -4px ${color}, 0 30px 60px -24px rgba(0,0,0,0.7)`,
-        }}
-      >
+      <DialogContent className="max-w-[40rem] border border-blue-700/60 bg-zinc-950 text-white shadow-lg [&>button]:text-white/70 [&>button]:hover:text-white">
         <DialogHeader>
-          <DialogTitle className="text-gray-900">{skill.title}</DialogTitle>
+          <DialogTitle className="text-base font-semibold text-white">
+            {skill.title}
+          </DialogTitle>
           <DialogDescription className="sr-only">
             Details for the {skill.title} skill
           </DialogDescription>
@@ -79,13 +72,13 @@ export function SkillsModal({ skill }: { skill: Skill }) {
 
         {skill.proficiency && (
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500">Level:</span>
-            <ProficiencyBadge proficiency={skill.proficiency} />
+            <span className="text-base leading-7 text-white/80">Level:</span>
+            <ProficiencyLabel proficiency={skill.proficiency} />
           </div>
         )}
 
         {skill.description && (
-          <p className="whitespace-pre-line text-sm leading-relaxed text-gray-700">
+          <p className="whitespace-pre-line text-base leading-7 text-white/80">
             {skill.description}
           </p>
         )}
