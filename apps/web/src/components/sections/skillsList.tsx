@@ -60,7 +60,7 @@ export function SkillsList({ skillGroups }: SkillsListProps) {
 
               <AccordionContent>
                 {group?.description && (
-                  <p className="mb-4 text-sm text-muted-foreground">
+                  <p className="mb-4 text-base leading-7 text-foreground/80">
                     {group.description}
                   </p>
                 )}

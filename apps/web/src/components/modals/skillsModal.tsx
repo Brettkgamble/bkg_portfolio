@@ -63,7 +63,7 @@ export function SkillsModal({ skill }: { skill: Skill }) {
         onMouseLeave={() => setActive(false)}
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
-        className="inline-flex items-center rounded-full border px-3.5 py-1 text-sm font-semibold tracking-wide outline-none transition-all duration-200"
+        className="inline-flex items-center rounded-full border px-3.5 py-1 text-xs font-normal outline-none transition-all duration-200"
         style={{
           color,
           borderColor: color,
