@@ -4,8 +4,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@workspace/ui/components/accordion";
+import { stegaClean } from "next-sanity";
 
-import { SkillsModal, type Skill } from "../modals/skillsModal";
+import { SkillsModal, proficiencyColor, type Skill } from "../modals/skillsModal";
 
 type SkillGroup = {
   _id?: string;
@@ -15,6 +16,43 @@ type SkillGroup = {
 };
 
 type SkillsListProps = { skillGroups?: SkillGroup[] | null };
+
+const PROFICIENCY_ORDER = [
+  "expert",
+  "advanced",
+  "intermediate",
+  "beginner",
+] as const;
+
+const PROFICIENCY_LABELS: Record<string, string> = {
+  expert: "Expert",
+  advanced: "Advanced",
+  intermediate: "Intermediate",
+  beginner: "Beginner",
+};
+
+function buildProficiencySections(skills: Skill[]) {
+  const sections = [
+    ...PROFICIENCY_ORDER.map((prof) => ({
+      key: prof,
+      label: PROFICIENCY_LABELS[prof],
+      skills: skills.filter((skill) => stegaClean(skill?.proficiency) === prof),
+    })),
+    {
+      key: "other",
+      label: "Other",
+      skills: skills.filter((skill) => {
+        const proficiency = stegaClean(skill?.proficiency);
+        return (
+          !proficiency ||
+          !(PROFICIENCY_ORDER as readonly string[]).includes(proficiency)
+        );
+      }),
+    },
+  ];
+
+  return sections.filter((section) => section.skills.length > 0);
+}
 
 export function SkillsList({ skillGroups }: SkillsListProps) {
   const groups = (skillGroups ?? []).filter(
@@ -34,14 +72,11 @@ export function SkillsList({ skillGroups }: SkillsListProps) {
         <hr className="mt-2 h-1 w-full border-0 bg-foreground/20 dark:bg-blue-700" />
       </aside>
 
-      <Accordion
-        type="multiple"
-        defaultValue={[firstValue]}
-        className="w-full"
-      >
+      <Accordion type="multiple" defaultValue={[firstValue]} className="w-full">
         {groups.map((group, index) => {
           const value = group?._id ?? `group-${index}`;
           const count = group?.skills?.length ?? 0;
+          const sections = buildProficiencySections(group?.skills ?? []);
 
           return (
             <AccordionItem
@@ -64,14 +99,29 @@ export function SkillsList({ skillGroups }: SkillsListProps) {
                     {group.description}
                   </p>
                 )}
-                <div className="flex flex-wrap gap-2">
-                  {(group?.skills ?? []).map((skill, skillIndex) => (
-                    <SkillsModal
-                      key={`${skill?._id ?? "skill"}-${skillIndex}`}
-                      skill={skill}
-                    />
+
+                <div className="flex flex-col gap-4">
+                  {sections.map((section) => (
+                    <div key={section.key}>
+                      <h4
+                        className="mb-2 text-xs font-semibold uppercase tracking-wide"
+                        style={{ color: proficiencyColor(section.key) }}
+                      >
+                        {section.label}
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {section.skills.map((skill, skillIndex) => (
+                          <SkillsModal
+                            key={`${skill?._id ?? "skill"}-${skillIndex}`}
+                            skill={skill}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
+
+                <hr className="mt-6 h-px w-full border-0 bg-foreground/20 dark:bg-blue-700" />
               </AccordionContent>
             </AccordionItem>
           );

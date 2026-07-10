@@ -28,7 +28,7 @@ const PROFICIENCY_COLOR: Record<string, string> = {
 
 const DEFAULT_COLOR = "#94a3b8"; // slate-400
 
-function proficiencyColor(proficiency?: string | null) {
+export function proficiencyColor(proficiency?: string | null) {
   const key = stegaClean(proficiency);
   if (!key) return DEFAULT_COLOR;
   return PROFICIENCY_COLOR[key] ?? DEFAULT_COLOR;
