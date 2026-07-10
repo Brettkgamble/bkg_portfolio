@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from "@workspace/ui/components/dialog";
 import { stegaClean } from "next-sanity";
-import { useState } from "react";
 
 export type Skill = {
   _id?: string;
@@ -51,7 +50,6 @@ function ProficiencyBadge({ proficiency }: { proficiency?: string | null }) {
 }
 
 export function SkillsModal({ skill }: { skill: Skill }) {
-  const [active, setActive] = useState(false);
   if (!skill?.title) return null;
 
   const color = proficiencyColor(skill.proficiency);
@@ -59,20 +57,7 @@ export function SkillsModal({ skill }: { skill: Skill }) {
   return (
     <Dialog>
       <DialogTrigger
-        onMouseEnter={() => setActive(true)}
-        onMouseLeave={() => setActive(false)}
-        onFocus={() => setActive(true)}
-        onBlur={() => setActive(false)}
-        className="inline-flex items-center rounded-full border px-3.5 py-1 text-xs font-normal outline-none transition-all duration-200"
-        style={{
-          color,
-          borderColor: color,
-          backgroundColor: active ? `${color}26` : `${color}14`,
-          boxShadow: active
-            ? `0 0 22px -4px ${color}, 0 0 8px -2px ${color}, inset 0 0 10px -6px ${color}`
-            : `0 0 12px -5px ${color}, inset 0 0 8px -7px ${color}`,
-          transform: active ? "translateY(-1px)" : "none",
-        }}
+        className="inline-flex items-center rounded-full border border-white/20 bg-white px-3.5 py-1 text-xs font-normal text-gray-900 outline-none transition-colors duration-200 hover:bg-violet-300 focus-visible:ring-2 focus-visible:ring-white/40"
         title="Click for more info"
       >
         {skill.title}
