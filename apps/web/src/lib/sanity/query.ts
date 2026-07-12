@@ -174,6 +174,40 @@ const featuredBlogBlock = /* groq */ `
   }
 `;
 
+const educationEntryFragment = /* groq */ `
+  _id,
+  title,
+  entryType,
+  credentialType,
+  fieldOfStudy,
+  status,
+  startYear,
+  completionYear,
+  expectedCompletionYear,
+  "description": description[]{
+    ...,
+    ${markDefsFragment}
+  },
+  "parentEducation": parentEducation[]->{
+    _id,
+    title,
+  },
+  "organization": organization[]->{
+    _id,
+    title,
+    website,
+    linkedInUrl,
+    logo{
+      ...,
+      ...asset->{
+        "alt": coalesce(altText, originalFilename, "no-alt"),
+        "blurData": metadata.lqip,
+        "dominantColor": metadata.palette.dominant.background
+      },
+    },
+  }
+`;
+
 const resumeBlock = /* groq */ `
   _type == "resume" => {
     ...,
@@ -205,6 +239,29 @@ const resumeBlock = /* groq */ `
         proficiency
       }
     },
+    "educationGroups": educationGroups[]->{
+      _id,
+      title,
+      description,
+      "entries": entries[]->{
+        ${educationEntryFragment}
+      }
+    },
+  }
+`;
+
+const educationBlock = /* groq */ `
+  _type == "educationBlock" => {
+    ...,
+    title,
+    "educationGroups": educationGroups[]->{
+      _id,
+      title,
+      description,
+      "entries": entries[]->{
+        ${educationEntryFragment}
+      }
+    },
   }
 `;
 
@@ -219,7 +276,8 @@ const pageBuilderFragment = /* groq */ `
     ${featureCardsIconBlock},
     ${subscribeNewsletterBlock},
     ${imageLinkCardsBlock},
-    ${resumeBlock}
+    ${resumeBlock},
+    ${educationBlock}
   }
 `;
 

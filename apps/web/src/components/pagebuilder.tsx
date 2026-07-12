@@ -7,6 +7,7 @@ import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 
 import { BioBlock } from "./sections/bioBlock";
 import { CTABlock } from "./sections/cta";
+import { EducationBlock } from "./sections/educationBlock";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeaturedBlog } from "./sections/featuredBlog";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
@@ -37,6 +38,7 @@ const BLOCK_COMPONENTS: Record<string, ComponentType<any>> = {
   featuredBlog: FeaturedBlog,
   hero: HeroBlock,
   featureCardsIcon: FeatureCardsWithIcon,
+  educationBlock: EducationBlock,
   resume: ResumeBlock,
   skillsList: SkillsList,
   subscribeNewsletter: SubscribeNewsletter,

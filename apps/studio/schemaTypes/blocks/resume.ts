@@ -59,6 +59,20 @@ export const resume = defineType({
           validation: (Rule) =>
             Rule.required().min(1).error('Add at least one skill group'),
     }),
+        defineField({
+          name: 'educationGroups',
+          title: 'Education Groups',
+          description:
+            'Groups of education entries to display on this resume (e.g. Formal Education, Online Learning)',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'reference',
+              to: [{ type: 'educationGroup' }],
+              options: { disableNew: true },
+            }),
+          ],
+    }),
   ],
   preview: {
     select: {

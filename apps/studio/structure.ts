@@ -13,6 +13,7 @@ import {
   Settings2,
   User,
   Wrench,
+  BookOpen,
 } from "lucide-react";
 import type {
   StructureBuilder,
@@ -139,6 +140,9 @@ export const structure = (
       createList({ S, type: "author", title: "Authors", icon: User }),
       createList({ S, type: "skillsList", title: "Skill Groups", icon: Wrench }),
       createList({ S, type: "skills", title: "Skills", icon: Wrench }),
+      createList({ S, type: "organization", title: "Organizations", icon: BookOpen }),
+      createList({ S, type: "educationGroup", title: "Education Groups", icon: BookOpen }),
+      createList({ S, type: "higherEducation", title: "Education", icon: BookOpen }),
       S.divider(),
       S.listItem()
         .title("Site Configuration")

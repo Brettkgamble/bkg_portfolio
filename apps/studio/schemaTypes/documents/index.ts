@@ -14,7 +14,26 @@ import { process } from "./process";
 import { settings } from "./settings";
 import { skills } from "../blocks/skills";
 import { skillsList } from "../blocks/skillsList";
+import { higherEducation } from "../blocks/higherEducation";
+import { educationGroup } from "../blocks/educationGroup";
+import { organization } from "./organization";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [author, blog, categoryType, customer, job, metals, page, process, faq, skills, skillsList, ...singletons];
+export const documents = [
+  author,
+  blog,
+  categoryType,
+  customer,
+  job,
+  metals,
+  page,
+  process,
+  faq,
+  skills,
+  skillsList,
+  organization,
+  higherEducation,
+  educationGroup,
+  ...singletons,
+];
