@@ -5,6 +5,7 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogTitle,
   DialogTrigger,
 } from "@workspace/ui/components/dialog";
 import { GraduationCap } from "lucide-react";
@@ -183,6 +184,7 @@ function EducationModalContent({
 }) {
   return (
     <DialogContent className="max-w-[40rem] border border-gray-200 bg-white text-gray-900 shadow-lg [&>button]:text-gray-500 [&>button]:hover:text-gray-900">
+      <DialogTitle className="sr-only">{entry.title}</DialogTitle>
       <DialogDescription className="sr-only">
         Details for {entry.title}
       </DialogDescription>
