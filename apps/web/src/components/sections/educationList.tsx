@@ -85,20 +85,11 @@ function EducationEntryList({
   const coursework = getCourseworkForParent(allEntries, entry._id);
 
   return (
-    <div key={`${entry?._id ?? "entry"}-${entryIndex}`}>
-      <EducationModal entry={entry} />
-      {coursework.length > 0 && (
-        <div className="ml-4 mt-2 flex flex-col gap-2 border-l border-white/15 pl-3">
-          {coursework.map((module, moduleIndex) => (
-            <EducationModal
-              key={`${module?._id ?? "module"}-${moduleIndex}`}
-              entry={module}
-              compact
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <EducationModal
+      key={`${entry?._id ?? "entry"}-${entryIndex}`}
+      entry={entry}
+      coursework={coursework}
+    />
   );
 }
 

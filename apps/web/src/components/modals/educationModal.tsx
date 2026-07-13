@@ -2,12 +2,12 @@
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@workspace/ui/components/dialog";
+import { GraduationCap } from "lucide-react";
 import { stegaClean } from "next-sanity";
 
 import { RichText } from "../richtext";
@@ -85,20 +85,30 @@ function CredentialLabel({ credentialType }: { credentialType?: string | null })
   const clean = stegaClean(credentialType);
   if (!clean) return null;
   return (
-    <span
-      className="text-xs font-semibold uppercase tracking-wide"
-      style={{ color: credentialColor(credentialType) }}
-    >
+    <span className="text-xs font-semibold uppercase tracking-wide text-gray-900">
       {credentialLabel(credentialType)}
+    </span>
+  );
+}
+
+function CourseworkBadge({ title }: { title: string }) {
+  return (
+    <span
+      className="inline-block rounded-lg border border-gray-300 px-2 py-1 text-sm text-blue-800 transition-colors duration-150 hover:bg-blue-100"
+      title={title}
+    >
+      {title}
     </span>
   );
 }
 
 export function EducationModal({
   entry,
+  coursework = [],
   compact = false,
 }: {
   entry: EducationEntry;
+  coursework?: EducationEntry[];
   compact?: boolean;
 }) {
   if (!entry?.title) return null;
@@ -108,117 +118,145 @@ export function EducationModal({
   const isInProgress = stegaClean(entry.status) === "in_progress";
   const isCoursework = stegaClean(entry.entryType) === "coursework";
 
+  if (compact) {
+    return (
+      <Dialog>
+        <DialogTrigger
+          className="flex w-full items-start gap-2 rounded-md border border-white/10 bg-white/5 p-2 text-left outline-none transition-colors duration-200 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40"
+          title="Click for more details"
+        >
+          <span className="block text-xs font-medium text-white">{entry.title}</span>
+        </DialogTrigger>
+        <EducationModalContent
+          entry={entry}
+          org={org}
+          period={period}
+          isInProgress={isInProgress}
+          isCoursework={isCoursework}
+          coursework={coursework}
+        />
+      </Dialog>
+    );
+  }
+
   return (
     <Dialog>
-      <DialogTrigger
-        className={
-          compact
-            ? "flex w-full items-start gap-2 rounded-md border border-white/10 bg-white/5 p-2 text-left outline-none transition-colors duration-200 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40"
-            : "flex w-full items-start gap-3 rounded-lg border border-white/20 bg-white/5 p-3 text-left outline-none transition-colors duration-200 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40"
-        }
-        title="Click for more details"
-      >
-        {org?.logo && !compact && (
-          <SanityImage
-            asset={org.logo}
-            alt={org.title ?? "Organization logo"}
-            width={40}
-            height={40}
-            className="mt-0.5 h-10 w-10 shrink-0 rounded object-contain bg-white p-1"
-          />
-        )}
-        <span className="min-w-0 flex-1">
-          <span
-            className={
-              compact
-                ? "block text-xs font-medium text-white"
-                : "block text-sm font-semibold text-white"
-            }
-          >
-            {entry.title}
-          </span>
-          {!compact && org?.title && (
-            <span className="mt-0.5 block text-xs text-white/70">
-              {org.title}
-            </span>
-          )}
-          <span className="mt-2 flex flex-wrap items-center gap-2">
-            {period && (
-              <span className="text-xs text-white/60">{period}</span>
-            )}
-            {!compact && entry.credentialType && (
-              <CredentialLabel credentialType={entry.credentialType} />
-            )}
-            {isInProgress && (
-              <span className="text-xs font-medium text-sky-300">
-                In progress
-              </span>
-            )}
-            {isCoursework && (
-              <span className="text-xs text-white/50">Module</span>
-            )}
-          </span>
-        </span>
-      </DialogTrigger>
+      <span className="block w-full">
+        <DialogTrigger
+          className="flex w-full items-start rounded-lg px-2 py-1 text-left text-base font-bold text-white outline-none transition-colors duration-150 ease-in-out hover:bg-violet-300/25 focus-visible:ring-2 focus-visible:ring-white/40"
+          title="Click for more info"
+        >
+          <GraduationCap className="mr-4 mt-1 h-5 w-5 shrink-0 text-white/80" />
+          <span>{entry.title}</span>
+        </DialogTrigger>
+      </span>
+      {period && (
+        <span className="block w-full text-sm text-white/70 ml-12">{period}</span>
+      )}
 
-      <DialogContent className="max-w-[40rem] border border-blue-700/60 bg-zinc-950 text-white shadow-lg [&>button]:text-white/70 [&>button]:hover:text-white">
-        <DialogHeader>
-          <DialogTitle className="text-base font-semibold text-white">
-            {entry.title}
-          </DialogTitle>
-          <DialogDescription className="sr-only">
-            Details for {entry.title}
-          </DialogDescription>
-        </DialogHeader>
+      <EducationModalContent
+        entry={entry}
+        org={org}
+        period={period}
+        isInProgress={isInProgress}
+        isCoursework={isCoursework}
+        coursework={coursework}
+      />
+    </Dialog>
+  );
+}
 
-        <div className="flex items-start gap-3">
-          {org?.logo && (
+function EducationModalContent({
+  entry,
+  org,
+  period,
+  isInProgress,
+  isCoursework,
+  coursework,
+}: {
+  entry: EducationEntry;
+  org?: NonNullable<EducationEntry["organization"]>[number];
+  period: string | null;
+  isInProgress: boolean;
+  isCoursework: boolean;
+  coursework: EducationEntry[];
+}) {
+  return (
+    <DialogContent className="max-w-[40rem] border border-gray-200 bg-white text-gray-900 shadow-lg [&>button]:text-gray-500 [&>button]:hover:text-gray-900">
+      <DialogDescription className="sr-only">
+        Details for {entry.title}
+      </DialogDescription>
+
+      <div className="text-center">
+        {org?.logo && (
+          <div className="relative mx-auto h-[100px] w-full max-w-[160px] pt-2">
             <SanityImage
               asset={org.logo}
               alt={org.title ?? "Organization logo"}
-              width={48}
-              height={48}
-              className="h-12 w-12 shrink-0 rounded object-contain bg-white p-1"
+              fill
+              sizes="160px"
+              className="object-contain object-center"
             />
-          )}
-          <div className="min-w-0">
-            {org?.title && (
-              <p className="text-base font-semibold text-white">{org.title}</p>
-            )}
-            {entry.fieldOfStudy && (
-              <p className="text-sm text-white/80">{entry.fieldOfStudy}</p>
-            )}
-            {period && <p className="mt-1 text-sm text-white/70">{period}</p>}
           </div>
-        </div>
+        )}
+
+        {org?.title && (
+          <h3 className="pt-4 text-xl font-medium text-gray-900">{org.title}</h3>
+        )}
+        <h3 className="pt-2 text-base font-medium text-gray-900">{entry.title}</h3>
+        {entry.fieldOfStudy && (
+          <p className="pt-1 text-sm text-gray-700">{entry.fieldOfStudy}</p>
+        )}
+        {period && (
+          <h5 className="pt-2 text-sm font-medium text-gray-600">{period}</h5>
+        )}
 
         {entry.parentEducation?.[0]?.title && (
-          <p className="text-sm text-white/70">
+          <p className="pt-2 text-sm text-gray-600">
             Part of: {entry.parentEducation[0].title}
           </p>
         )}
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-3">
           {entry.credentialType && (
-            <div className="flex items-center gap-2">
-              <span className="text-base leading-7 text-white/80">Type:</span>
-              <CredentialLabel credentialType={entry.credentialType} />
-            </div>
+            <CredentialLabel credentialType={entry.credentialType} />
           )}
-          {isInProgress && entry.expectedCompletionYear && (
-            <span className="text-sm text-sky-300">
-              Expected completion: {entry.expectedCompletionYear}
-            </span>
+          {isInProgress && (
+            <span className="text-xs font-medium text-sky-600">In progress</span>
+          )}
+          {isCoursework && (
+            <span className="text-xs text-gray-500">Module</span>
           )}
         </div>
 
-        {entry.description && (
-          <RichText
-            richText={entry.description}
-            className="prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white prose-li:text-white/80 prose-strong:text-white"
-          />
+        {coursework.length > 0 && (
+          <div className="w-full flex-none py-4">
+            <div className="flex flex-wrap justify-center gap-2">
+              {coursework.map((module, index) => (
+                <CourseworkBadge
+                  key={`${module._id ?? "module"}-${index}`}
+                  title={module.title ?? "Untitled module"}
+                />
+              ))}
+            </div>
+          </div>
         )}
-      </DialogContent>
-    </Dialog>
+
+        {entry.description && (
+          <div className="py-4 text-left">
+            <RichText
+              richText={entry.description}
+              className="max-w-none prose-p:text-gray-700 prose-headings:text-gray-900 prose-li:text-gray-700 prose-strong:text-gray-900"
+            />
+          </div>
+        )}
+
+        <div className="items-center px-4 py-3">
+          <DialogClose className="w-2/5 min-w-[8rem] rounded-md bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm transition-colors hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400/50">
+            Close
+          </DialogClose>
+        </div>
+      </div>
+    </DialogContent>
   );
 }
