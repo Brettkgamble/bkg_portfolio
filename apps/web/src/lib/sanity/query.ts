@@ -205,6 +205,25 @@ const educationEntryFragment = /* groq */ `
         "dominantColor": metadata.palette.dominant.background
       },
     },
+  },
+  "accreditationOrganization": accreditationOrganization[]->{
+    _id,
+    title,
+    website,
+    linkedInUrl,
+    logo{
+      ...,
+      ...asset->{
+        "alt": coalesce(altText, originalFilename, "no-alt"),
+        "blurData": metadata.lqip,
+        "dominantColor": metadata.palette.dominant.background
+      },
+    },
+  },
+  "relatedBlogPosts": relatedBlogPosts[]->{
+    _id,
+    title,
+    "slug": slug.current,
   }
 `;
 

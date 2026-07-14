@@ -35,7 +35,8 @@ export const higherEducation = defineType({
     }),
     defineField({
       name: "organization",
-      title: "Organization",
+      title: "Delivering organization",
+      description: "The institution or provider that delivers this program",
       type: "array",
       of: [
         defineArrayMember({
@@ -45,7 +46,22 @@ export const higherEducation = defineType({
         }),
       ],
       validation: (Rule) =>
-        Rule.required().min(1).max(1).error("Select one organization"),
+        Rule.required().min(1).max(1).error("Select one delivering organization"),
+    }),
+    defineField({
+      name: "accreditationOrganization",
+      title: "Accreditation organization",
+      description:
+        "The body that accredits this credential, if different from the delivering organization",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "organization" }],
+          options: { disableNew: true },
+        }),
+      ],
+      validation: (Rule) => Rule.max(1).error("Select at most one accrediting organization"),
     }),
     defineField({
       name: "credentialType",
@@ -161,6 +177,19 @@ export const higherEducation = defineType({
       type: "richText",
       description: "Optional details about this program or credential",
     }),
+    defineField({
+      name: "relatedBlogPosts",
+      title: "Related blog posts",
+      description: "Blog posts about this education that visitors can read on the site",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "blog" }],
+          options: { disableNew: true },
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {
@@ -169,12 +198,14 @@ export const higherEducation = defineType({
       entryType: "entryType",
       credentialType: "credentialType",
       organization: "organization.0->title",
+      accreditor: "accreditationOrganization.0->title",
       parentTitle: "parentEducation.0->title",
     },
-    prepare: ({ title, status, entryType, credentialType, organization, parentTitle }) => ({
+    prepare: ({ title, status, entryType, credentialType, organization, accreditor, parentTitle }) => ({
       title: title || "Untitled education",
       subtitle: [
         organization,
+        accreditor ? `Accredited by ${accreditor}` : null,
         entryType === "coursework" && parentTitle
           ? `Module of ${parentTitle}`
           : null,

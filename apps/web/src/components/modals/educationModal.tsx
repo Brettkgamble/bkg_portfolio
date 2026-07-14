@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@workspace/ui/components/dialog";
+import Link from "next/link";
 import { GraduationCap } from "lucide-react";
 import { stegaClean } from "next-sanity";
 
@@ -35,6 +36,18 @@ export type EducationEntry = {
     website?: string | null;
     linkedInUrl?: string | null;
     logo?: unknown;
+  }> | null;
+  accreditationOrganization?: Array<{
+    _id?: string;
+    title?: string | null;
+    website?: string | null;
+    linkedInUrl?: string | null;
+    logo?: unknown;
+  }> | null;
+  relatedBlogPosts?: Array<{
+    _id?: string;
+    title?: string | null;
+    slug?: string | null;
   }> | null;
 };
 
@@ -115,6 +128,7 @@ export function EducationModal({
   if (!entry?.title) return null;
 
   const org = entry.organization?.[0];
+  const accreditor = entry.accreditationOrganization?.[0];
   const period = formatEducationPeriod(entry);
   const isInProgress = stegaClean(entry.status) === "in_progress";
   const isCoursework = stegaClean(entry.entryType) === "coursework";
@@ -131,6 +145,7 @@ export function EducationModal({
         <EducationModalContent
           entry={entry}
           org={org}
+          accreditor={accreditor}
           period={period}
           isInProgress={isInProgress}
           isCoursework={isCoursework}
@@ -158,6 +173,7 @@ export function EducationModal({
       <EducationModalContent
         entry={entry}
         org={org}
+        accreditor={accreditor}
         period={period}
         isInProgress={isInProgress}
         isCoursework={isCoursework}
@@ -170,6 +186,7 @@ export function EducationModal({
 function EducationModalContent({
   entry,
   org,
+  accreditor,
   period,
   isInProgress,
   isCoursework,
@@ -177,6 +194,7 @@ function EducationModalContent({
 }: {
   entry: EducationEntry;
   org?: NonNullable<EducationEntry["organization"]>[number];
+  accreditor?: NonNullable<EducationEntry["accreditationOrganization"]>[number];
   period: string | null;
   isInProgress: boolean;
   isCoursework: boolean;
@@ -204,6 +222,11 @@ function EducationModalContent({
 
         {org?.title && (
           <h3 className="pt-4 text-xl font-medium text-gray-900">{org.title}</h3>
+        )}
+        {accreditor?.title && (
+          <p className="pt-1 text-sm text-gray-600">
+            Accredited by {accreditor.title}
+          </p>
         )}
         <h3 className="pt-2 text-base font-medium text-gray-900">{entry.title}</h3>
         {entry.fieldOfStudy && (
@@ -250,6 +273,33 @@ function EducationModalContent({
               richText={entry.description}
               className="max-w-none prose-p:text-gray-700 prose-headings:text-gray-900 prose-li:text-gray-700 prose-strong:text-gray-900"
             />
+          </div>
+        )}
+
+        {(entry.relatedBlogPosts?.length ?? 0) > 0 && (
+          <div className="py-4 text-left">
+            <h4 className="mb-2 text-sm font-semibold text-gray-900">
+              Related posts
+            </h4>
+            <ul className="space-y-2">
+              {entry.relatedBlogPosts?.map((post, index) => {
+                const slug =
+                  typeof post.slug === "object"
+                    ? (post.slug as { current?: string })?.current ?? null
+                    : (post.slug ?? null);
+
+                return (
+                  <li key={post._id ?? `post-${index}`}>
+                    <Link
+                      href={slug ?? "#"}
+                      className="text-sm text-blue-700 transition-colors hover:text-blue-900 hover:underline"
+                    >
+                      {post.title ?? "Untitled post"}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         )}
 
