@@ -112,6 +112,21 @@ export const blog = defineType({
       group: GROUP.MAIN_CONTENT,
     }),
     defineField({
+      name: "relatedCertificates",
+      title: "Related certificates",
+      description:
+        "Certificates related to this post (create certificates first, then attach them here)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "certificate" }],
+          options: { disableNew: true },
+        }),
+      ],
+      group: GROUP.MAIN_CONTENT,
+    }),
+    defineField({
       name: "publishedAt",
       type: "date",
       initialValue: () => new Date().toISOString().split("T")[0],
@@ -120,6 +135,7 @@ export const blog = defineType({
         "The date when your blog post will appear to have been published",
       group: GROUP.MAIN_CONTENT,
     }),
+
     defineField({
       name: "image",
       title: "Image",

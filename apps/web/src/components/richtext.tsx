@@ -8,7 +8,9 @@ import {
 
 import { parseChildrenToSlug } from "@/utils";
 
+import { CertificateLinks } from "./certificate-links";
 import { SanityImage } from "./sanity-image";
+
 
 const components: Partial<PortableTextReactComponents> = {
   block: {
@@ -95,7 +97,17 @@ const components: Partial<PortableTextReactComponents> = {
         />
       </div>
     ),
+    certificate: ({ value }) => {
+      const certificate = value?.certificate;
+      if (!certificate) return null;
+      return (
+        <aside className="my-6 not-prose rounded-lg border border-border/70 bg-muted/30 p-4">
+          <CertificateLinks certificates={[certificate]} compact />
+        </aside>
+      );
+    },
   },
+
   hardBreak: () => <br />,
 };
 

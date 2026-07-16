@@ -2,6 +2,7 @@ import { author } from "../blocks/author";
 import { blog } from "./blog";
 import { blogIndex } from "./blog-index";
 import { categoryType } from "./categories";
+import { certificate } from "./certificate";
 import { customer } from "./customer";
 import { faq } from "./faq";
 import { footer } from "./footer";
@@ -24,6 +25,7 @@ export const documents = [
   author,
   blog,
   categoryType,
+  certificate,
   customer,
   job,
   metals,
@@ -37,3 +39,4 @@ export const documents = [
   educationGroup,
   ...singletons,
 ];
+

@@ -190,7 +190,21 @@ export const higherEducation = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "certificates",
+      title: "Certificates",
+      description: "Proof artifacts (images and/or verification URLs) for this credential",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "certificate" }],
+          options: { disableNew: true },
+        }),
+      ],
+    }),
   ],
+
   preview: {
     select: {
       title: "title",

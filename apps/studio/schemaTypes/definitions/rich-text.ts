@@ -1,4 +1,4 @@
-import { ImageIcon, LinkIcon } from "@sanity/icons";
+import { DocumentIcon, ImageIcon, LinkIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 const richTextMembers = [
@@ -56,7 +56,36 @@ const richTextMembers = [
       }),
     ],
   }),
+  defineArrayMember({
+    name: "certificate",
+    title: "Certificate",
+    type: "object",
+    icon: DocumentIcon,
+    fields: [
+      defineField({
+        name: "certificate",
+        type: "reference",
+        description: "Certificate to insert into the article",
+        to: [{ type: "certificate" }],
+        options: { disableNew: true },
+        validation: (Rule) =>
+          Rule.required().error("Select a certificate to insert"),
+      }),
+    ],
+    preview: {
+      select: {
+        title: "certificate->title",
+        media: "certificate->image",
+      },
+      prepare: ({ title, media }) => ({
+        title: title || "Certificate",
+        subtitle: "Certificate block",
+        media,
+      }),
+    },
+  }),
 ];
+
 
 export const richText = defineType({
   name: "richText",

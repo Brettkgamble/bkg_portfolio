@@ -12,6 +12,10 @@ import Link from "next/link";
 import { GraduationCap } from "lucide-react";
 import { stegaClean } from "next-sanity";
 
+import {
+  CertificateLinks,
+  type CertificateItem,
+} from "../certificate-links";
 import { RichText } from "../richtext";
 import { SanityImage } from "../sanity-image";
 
@@ -49,7 +53,9 @@ export type EducationEntry = {
     title?: string | null;
     slug?: string | null;
   }> | null;
+  certificates?: CertificateItem[] | null;
 };
+
 
 const CREDENTIAL_COLOR: Record<string, string> = {
   formal_degree: "#38bdf8",
@@ -303,7 +309,17 @@ function EducationModalContent({
           </div>
         )}
 
+        {(entry.certificates?.length ?? 0) > 0 && (
+          <div className="py-4 text-left">
+            <h4 className="mb-2 text-sm font-semibold text-gray-900">
+              Certificates
+            </h4>
+            <CertificateLinks certificates={entry.certificates} />
+          </div>
+        )}
+
         <div className="items-center px-4 py-3">
+
           <DialogClose className="w-2/5 min-w-[8rem] rounded-md bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm transition-colors hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400/50">
             Close
           </DialogClose>

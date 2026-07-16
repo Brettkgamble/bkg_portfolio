@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { stegaClean } from "next-sanity";
 
+import { CertificateLinks } from "@/components/certificate-links";
 import { ArticleJsonLd } from "@/components/json-ld";
 import { RichText } from "@/components/richtext";
 import { SanityImage } from "@/components/sanity-image";
@@ -62,7 +63,8 @@ export default async function BlogSlugPage({
   const { slug } = await params;
   const { data } = await fetchBlogSlugPageData(slug);
   if (!data) return notFound();
-  const { title, description, image, richText } = data ?? {};
+  const { title, description, image, richText, relatedCertificates } =
+    data ?? {};
 
   return (
     <div className="container my-16 mx-auto px-4 md:px-6">
@@ -87,7 +89,14 @@ export default async function BlogSlugPage({
             </div>
           )}
           <RichText richText={richText ?? []} />
+          {(relatedCertificates?.length ?? 0) > 0 && (
+            <section className="mt-12 border-t border-border pt-8">
+              <h2 className="mb-4 text-xl font-semibold">Related certificates</h2>
+              <CertificateLinks certificates={relatedCertificates} />
+            </section>
+          )}
         </main>
+
 
         <div className="hidden lg:block">
           <div className="sticky top-4 rounded-lg ">

@@ -30,12 +30,32 @@ const markDefsFragment = /* groq */ `
   }
 `;
 
+const certificateFragment = /* groq */ `
+  _id,
+  title,
+  verificationUrl,
+  credentialId,
+  issuedDate,
+  ${imageFragment},
+  "issuingOrganization": issuingOrganization[]->{
+    _id,
+    title
+  }
+`;
+
 const richTextFragment = /* groq */ `
   richText[]{
     ...,
-    ${markDefsFragment}
+    ${markDefsFragment},
+    _type == "certificate" => {
+      ...,
+      "certificate": certificate->{
+        ${certificateFragment}
+      }
+    }
   }
 `;
+
 
 const blogAuthorFragment = /* groq */ `
   authors[0]->{
@@ -224,8 +244,12 @@ const educationEntryFragment = /* groq */ `
     _id,
     title,
     "slug": slug.current,
+  },
+  "certificates": certificates[]->{
+    ${certificateFragment}
   }
 `;
+
 
 const resumeBlock = /* groq */ `
   _type == "resume" => {
@@ -358,9 +382,13 @@ export const queryBlogSlugPageData = defineQuery(`
     ${blogAuthorFragment},
     ${imageFragment},
     ${richTextFragment},
+    "relatedCertificates": relatedCertificates[]->{
+      ${certificateFragment}
+    },
     ${pageBuilderFragment}
   }
 `);
+
 
 export const queryBlogPaths = defineQuery(`
   *[_type == "blog" && defined(slug.current)].slug.current
