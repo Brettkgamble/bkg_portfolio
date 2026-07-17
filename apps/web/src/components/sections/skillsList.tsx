@@ -61,8 +61,6 @@ export function SkillsList({ skillGroups }: SkillsListProps) {
 
   if (groups.length === 0) return null;
 
-  const firstValue = groups[0]?._id ?? "group-0";
-
   return (
     <div className="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-12 lg:gap-16">
       <aside className="flex flex-col items-center text-center md:items-start md:text-left">
@@ -72,7 +70,7 @@ export function SkillsList({ skillGroups }: SkillsListProps) {
         <hr className="mt-2 h-1 w-full border-0 bg-foreground/20 dark:bg-blue-700" />
       </aside>
 
-      <Accordion type="multiple" defaultValue={[firstValue]} className="w-full md:mt-12">
+      <Accordion type="multiple" defaultValue={[]} className="w-full md:mt-12">
         {groups.map((group, index) => {
           const value = group?._id ?? `group-${index}`;
           const count = group?.skills?.length ?? 0;
