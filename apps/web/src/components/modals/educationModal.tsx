@@ -207,13 +207,13 @@ function EducationModalContent({
   coursework: EducationEntry[];
 }) {
   return (
-    <DialogContent className="max-w-[40rem] border border-gray-200 bg-white text-gray-900 shadow-lg [&>button]:text-gray-500 [&>button]:hover:text-gray-900">
+    <DialogContent className="flex max-h-[min(70vh,36rem)] w-[min(92vw,56rem)] max-w-[min(92vw,56rem)] flex-col gap-0 overflow-hidden border border-gray-200 bg-white p-0 text-gray-900 shadow-lg [&>button]:text-gray-500 [&>button]:hover:text-gray-900">
       <DialogTitle className="sr-only">{entry.title}</DialogTitle>
       <DialogDescription className="sr-only">
         Details for {entry.title}
       </DialogDescription>
 
-      <div className="text-center">
+      <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain px-6 pt-6 text-center">
         {org?.logo && (
           <div className="relative mx-auto h-[100px] w-full max-w-[160px] pt-2">
             <SanityImage
@@ -274,10 +274,10 @@ function EducationModalContent({
         )}
 
         {entry.description && (
-          <div className="py-4 text-left">
+          <div className="max-w-full py-4 text-left break-words">
             <RichText
               richText={entry.description}
-              className="max-w-none prose-p:text-gray-700 prose-headings:text-gray-900 prose-li:text-gray-700 prose-strong:text-gray-900"
+              className="max-w-none overflow-x-hidden prose-p:text-gray-700 prose-headings:text-gray-900 prose-li:text-gray-700 prose-strong:text-gray-900 prose-img:max-w-full"
             />
           </div>
         )}
@@ -317,13 +317,12 @@ function EducationModalContent({
             <CertificateLinks certificates={entry.certificates} />
           </div>
         )}
+      </div>
 
-        <div className="items-center px-4 py-3">
-
-          <DialogClose className="w-2/5 min-w-[8rem] rounded-md bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm transition-colors hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400/50">
-            Close
-          </DialogClose>
-        </div>
+      <div className="shrink-0 border-t border-gray-100 px-6 py-3 text-center">
+        <DialogClose className="w-2/5 min-w-[8rem] rounded-md bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm transition-colors hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400/50">
+          Close
+        </DialogClose>
       </div>
     </DialogContent>
   );
