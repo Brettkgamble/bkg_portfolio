@@ -5,3 +5,5 @@ import { richText } from "./rich-text";
 import { address } from "./address";
 
 export const definitions = [customUrl, richText, button, pageBuilder, address];
+
+

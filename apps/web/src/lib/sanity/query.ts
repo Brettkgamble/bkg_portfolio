@@ -250,6 +250,39 @@ const educationEntryFragment = /* groq */ `
   }
 `;
 
+const workExperienceFragment = /* groq */ `
+  _id,
+  title,
+  "organization": organization[]->{
+    _id,
+    title,
+    website,
+    linkedInUrl,
+    logo{
+      ...,
+      ...asset->{
+        "alt": coalesce(altText, originalFilename, "no-alt"),
+        "blurData": metadata.lqip,
+        "dominantColor": metadata.palette.dominant.background
+      },
+    },
+  },
+  roles[]{
+    _key,
+    title,
+    status,
+    startDate,
+    endDate,
+    "description": description[]{
+      ...,
+      ${markDefsFragment}
+    }
+  }
+`;
+
+
+
+
 
 const resumeBlock = /* groq */ `
   _type == "resume" => {
@@ -290,6 +323,9 @@ const resumeBlock = /* groq */ `
         ${educationEntryFragment}
       }
     },
+    "workExperience": workExperience[]->{
+      ${workExperienceFragment}
+    },
   }
 `;
 
@@ -308,6 +344,16 @@ const educationBlock = /* groq */ `
   }
 `;
 
+const experienceBlock = /* groq */ `
+  _type == "experienceBlock" => {
+    ...,
+    title,
+    "entries": entries[]->{
+      ${workExperienceFragment}
+    },
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
@@ -320,9 +366,11 @@ const pageBuilderFragment = /* groq */ `
     ${subscribeNewsletterBlock},
     ${imageLinkCardsBlock},
     ${resumeBlock},
-    ${educationBlock}
+    ${educationBlock},
+    ${experienceBlock}
   }
 `;
+
 
 /**
  * Query to extract a single image from a page document

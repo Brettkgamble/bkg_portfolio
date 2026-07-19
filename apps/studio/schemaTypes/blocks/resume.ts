@@ -73,7 +73,22 @@ export const resume = defineType({
             }),
           ],
     }),
+    defineField({
+      name: "workExperience",
+      title: "Work Experience",
+      description:
+        "Employers / roles to display on this resume (drag to reorder)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "workExperience" }],
+          options: { disableNew: true },
+        }),
+      ],
+    }),
   ],
+
   preview: {
     select: {
       title: "name",

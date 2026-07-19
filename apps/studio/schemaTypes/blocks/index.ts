@@ -1,6 +1,7 @@
 import { bioBlock } from "./bioBlock";
 import { cta } from "./cta";
 import { educationBlock } from "./educationBlock";
+import { experienceBlock } from "./experienceBlock";
 import { faqAccordion } from "./faq-accordion";
 import { featuredBlog } from "./featuredBlog";
 import { featureCardsIcon } from "./feature-cards-icon";
@@ -19,5 +20,7 @@ export const pageBuilderBlocks = [
   imageLinkCards,
   resume,
   educationBlock,
+  experienceBlock,
   subscribeNewsletter,
 ];
+

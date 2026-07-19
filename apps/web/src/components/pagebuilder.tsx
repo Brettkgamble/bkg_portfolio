@@ -8,6 +8,7 @@ import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 import { BioBlock } from "./sections/bioBlock";
 import { CTABlock } from "./sections/cta";
 import { EducationBlock } from "./sections/educationBlock";
+import { ExperienceBlock } from "./sections/experienceBlock";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeaturedBlog } from "./sections/featuredBlog";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
@@ -16,6 +17,7 @@ import { ImageLinkCards } from "./sections/image-link-cards";
 import { ResumeBlock } from "./sections/resumeBlock";
 import { SkillsList } from "./sections/skillsList";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
+
 
 type PageBlock = any;
 
@@ -39,8 +41,10 @@ const BLOCK_COMPONENTS: Record<string, ComponentType<any>> = {
   hero: HeroBlock,
   featureCardsIcon: FeatureCardsWithIcon,
   educationBlock: EducationBlock,
+  experienceBlock: ExperienceBlock,
   resume: ResumeBlock,
   skillsList: SkillsList,
+
   subscribeNewsletter: SubscribeNewsletter,
   imageLinkCards: ImageLinkCards,
 } as const;

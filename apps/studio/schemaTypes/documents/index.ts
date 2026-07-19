@@ -18,6 +18,7 @@ import { skillsList } from "../blocks/skillsList";
 import { higherEducation } from "../blocks/higherEducation";
 import { educationGroup } from "../blocks/educationGroup";
 import { organization } from "./organization";
+import { workExperience } from "./workExperience";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
@@ -35,8 +36,10 @@ export const documents = [
   skills,
   skillsList,
   organization,
+  workExperience,
   higherEducation,
   educationGroup,
   ...singletons,
 ];
+
 

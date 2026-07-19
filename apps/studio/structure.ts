@@ -15,7 +15,9 @@ import {
   Wrench,
   BookOpen,
   Award,
+  Briefcase,
 } from "lucide-react";
+
 
 import type {
   StructureBuilder,
@@ -143,9 +145,11 @@ export const structure = (
       createList({ S, type: "skillsList", title: "Skill Groups", icon: Wrench }),
       createList({ S, type: "skills", title: "Skills", icon: Wrench }),
       createList({ S, type: "organization", title: "Organizations", icon: BookOpen }),
+      createList({ S, type: "workExperience", title: "Work Experience", icon: Briefcase }),
       createList({ S, type: "certificate", title: "Certificates", icon: Award }),
       createList({ S, type: "educationGroup", title: "Education Groups", icon: BookOpen }),
       createList({ S, type: "higherEducation", title: "Education", icon: BookOpen }),
+
 
       S.divider(),
       S.listItem()
