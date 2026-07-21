@@ -1,5 +1,6 @@
 import { stegaClean } from "next-sanity";
 
+import { SkillsModal, type Skill } from "../modals/skillsModal";
 import { RichText } from "../richtext";
 import { SanityImage } from "../sanity-image";
 
@@ -23,8 +24,8 @@ export type WorkExperienceEntry = {
     logo?: unknown;
   }> | null;
   roles?: WorkExperienceRole[] | null;
+  skills?: Skill[] | null;
 };
-
 
 type ExperienceListProps = {
   title?: string | null;
@@ -77,6 +78,7 @@ export function ExperienceList({
         {list.map((entry, index) => {
           const org = entry.organization?.[0];
           const roles = entry.roles?.filter(Boolean) ?? [];
+          const skills = entry.skills?.filter(Boolean) ?? [];
 
           return (
             <div
@@ -129,11 +131,26 @@ export function ExperienceList({
                     </div>
                   );
                 })}
+
+                {skills.length > 0 && (
+                  <div>
+                    <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Skills
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {skills.map((skill, skillIndex) => (
+                        <SkillsModal
+                          key={skill._id ?? `skill-${skillIndex}`}
+                          skill={skill}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           );
         })}
-
       </div>
     </div>
   );

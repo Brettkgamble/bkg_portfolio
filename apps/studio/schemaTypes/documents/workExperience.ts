@@ -119,6 +119,20 @@ export const workExperience = defineType({
       validation: (Rule) =>
         Rule.required().min(1).error("Add at least one role"),
     }),
+    defineField({
+      name: "skills",
+      title: "Skills",
+      description:
+        "Skills demonstrated in this employment (drag to reorder)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "skills" }],
+          options: { disableNew: true },
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {

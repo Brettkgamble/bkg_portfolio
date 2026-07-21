@@ -250,6 +250,35 @@ const educationEntryFragment = /* groq */ `
   }
 `;
 
+const relatedWorkExperienceFragment = /* groq */ `
+  "relatedWorkExperience": *[
+    _type == "workExperience"
+    && references(^._id)
+  ]{
+    _id,
+    title,
+    "organization": organization[]->{
+      _id,
+      title,
+      logo{
+        ...,
+        ...asset->{
+          "alt": coalesce(altText, originalFilename, "no-alt"),
+          "blurData": metadata.lqip,
+          "dominantColor": metadata.palette.dominant.background
+        },
+      },
+    },
+    "roles": roles[]{
+      _key,
+      title,
+      status,
+      startDate,
+      endDate
+    }
+  }
+`;
+
 const workExperienceFragment = /* groq */ `
   _id,
   title,
@@ -277,12 +306,18 @@ const workExperienceFragment = /* groq */ `
       ...,
       ${markDefsFragment}
     }
+  },
+  "skills": skills[]->{
+    _id,
+    title,
+    proficiency,
+    "description": description[]{
+      ...,
+      ${markDefsFragment}
+    },
+    ${relatedWorkExperienceFragment}
   }
 `;
-
-
-
-
 
 const resumeBlock = /* groq */ `
   _type == "resume" => {
@@ -312,7 +347,8 @@ const resumeBlock = /* groq */ `
           ...,
           ${markDefsFragment}
         },
-        proficiency
+        proficiency,
+        ${relatedWorkExperienceFragment}
       }
     },
     "educationGroups": educationGroups[]->{
@@ -328,6 +364,7 @@ const resumeBlock = /* groq */ `
     },
   }
 `;
+
 
 const educationBlock = /* groq */ `
   _type == "educationBlock" => {
