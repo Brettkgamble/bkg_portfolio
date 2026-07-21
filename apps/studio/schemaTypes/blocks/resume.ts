@@ -1,6 +1,8 @@
 import { UserIcon } from "@sanity/icons";
 import { defineField, defineType, defineArrayMember } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const resume = defineType({
   name: "resume",
   title: "Resume",
@@ -31,9 +33,7 @@ export const resume = defineType({
                   },
                 },
               ],
-              options: {
-                disableNew: true,
-              },
+              options: withAlphabeticalSort({ disableNew: true }, "name"),
             }),
           ],
           validation: (Rule) => [
@@ -53,7 +53,7 @@ export const resume = defineType({
             defineArrayMember({
               type: 'reference',
               to: [{ type: 'skillsList' }],
-              options: { disableNew: true },
+              options: withAlphabeticalSort({ disableNew: true }),
             }),
           ],
           validation: (Rule) =>
@@ -69,7 +69,7 @@ export const resume = defineType({
             defineArrayMember({
               type: 'reference',
               to: [{ type: 'educationGroup' }],
-              options: { disableNew: true },
+              options: withAlphabeticalSort({ disableNew: true }),
             }),
           ],
     }),
@@ -83,7 +83,7 @@ export const resume = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "workExperience" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
     }),

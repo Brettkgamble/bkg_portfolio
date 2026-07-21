@@ -3,6 +3,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 
 import UuidFieldComponent from "../../components/uuid-field-component";
 import { GROUP, GROUPS } from "../../utils/constant";
+import { withAlphabeticalSort } from "../../utils/reference-sort";
 
 export const job = defineType({
   name: "job",
@@ -72,6 +73,7 @@ export const job = defineType({
               title: "Metal Type",
               description: "Select the type of metal",
               to: [{ type: "metals" }],
+              options: withAlphabeticalSort({}, "name"),
               validation: (Rule) => Rule.required().error("Metal type is required"),
             }),
             defineField({
@@ -188,6 +190,7 @@ export const job = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "customer" }],
+          options: withAlphabeticalSort({}, "name"),
         }),
       ],
     }),
@@ -201,6 +204,7 @@ export const job = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "blog" }],
+          options: withAlphabeticalSort(),
         }),
       ],
     }),
@@ -214,6 +218,7 @@ export const job = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "process" }],
+          options: withAlphabeticalSort({}, "name"),
         }),
       ],
     }),

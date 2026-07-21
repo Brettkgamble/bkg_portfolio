@@ -30,6 +30,9 @@ export default defineConfig({
   mediaLibrary: {
     enabled: true,
   },
+  search: {
+    strategy: "groq2024",
+  },
   plugins: [
     presentationTool({
       resolve: {

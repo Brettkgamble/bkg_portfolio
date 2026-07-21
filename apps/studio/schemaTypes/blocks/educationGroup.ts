@@ -1,6 +1,8 @@
 import { BookIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const educationGroup = defineType({
   name: "educationGroup",
   title: "Education Group",
@@ -30,6 +32,7 @@ export const educationGroup = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "higherEducation" }],
+          options: withAlphabeticalSort(),
         }),
       ],
       validation: (Rule) =>

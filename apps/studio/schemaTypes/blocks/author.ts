@@ -1,6 +1,8 @@
 import { UserIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const author = defineType({
   name: "author",
   title: "Author",
@@ -35,13 +37,25 @@ export const author = defineType({
       name: 'introduction',
       title: 'Bio',
       type: 'array',
-      of: [{ type: 'reference', to: {type: 'bioBlock'}}]
+      of: [
+        {
+          type: 'reference',
+          to: { type: 'bioBlock' },
+          options: withAlphabeticalSort({}, "name"),
+        },
+      ],
     }),
     defineField({
       name: 'cv',
       title: 'Resume',
       type: 'array',
-      of: [{ type: 'reference', to: {type: 'resume'}}]
+      of: [
+        {
+          type: 'reference',
+          to: { type: 'resume' },
+          options: withAlphabeticalSort({}, "name"),
+        },
+      ],
     }),
   ],
   preview: {

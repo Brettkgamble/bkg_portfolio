@@ -1,6 +1,8 @@
 import { WrenchIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const skillsList = defineType({
   name: "skillsList",
   title: "Skill Group",
@@ -26,7 +28,13 @@ export const skillsList = defineType({
       name: "skills",
       title: "Skills",
       type: "array",
-      of: [defineArrayMember({ type: "reference", to: { type: "skills" } })],
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: { type: "skills" },
+          options: withAlphabeticalSort(),
+        }),
+      ],
       validation: (Rule) =>
         Rule.required().min(1).unique().error("Add at least one skill"),
     }),

@@ -1,6 +1,8 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const certificate = defineType({
   name: "certificate",
   title: "Certificate",
@@ -42,7 +44,7 @@ export const certificate = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "organization" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
       validation: (Rule) => Rule.max(1).error("Select at most one issuing organization"),

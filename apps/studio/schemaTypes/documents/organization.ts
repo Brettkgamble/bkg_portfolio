@@ -1,6 +1,8 @@
 import { CaseIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const organization = defineType({
   name: "organization",
   title: "Organization",
@@ -50,7 +52,13 @@ export const organization = defineType({
       name: "parentOrganizations",
       title: "Parent organizations",
       type: "array",
-      of: [defineArrayMember({ type: "reference", to: [{ type: "organization" }] })],
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "organization" }],
+          options: withAlphabeticalSort(),
+        }),
+      ],
     }),
     defineField({
       name: "linkedInUrl",

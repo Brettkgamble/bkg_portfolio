@@ -2,6 +2,8 @@
 import { Images } from "lucide-react";
 import { defineField, defineArrayMember, defineType } from "sanity";
 
+import { sortOptionList, withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const featuredBlog = defineType({
   name: "featuredBlog",
   type: "object",
@@ -29,11 +31,11 @@ export const featuredBlog = defineType({
       name: "orientation",
       type: "string",
       options: {
-        list: [
+        list: sortOptionList([
           { value: "imageLeft", title: "Image Left" },
           { value: "imageRight", title: "Image Right" },
           { value: "imageCenter", title: "Image Center"}
-        ],
+        ]),
       },
     }),
     defineField({
@@ -52,9 +54,7 @@ export const featuredBlog = defineType({
                   },
                 },
               ],
-              options: {
-                disableNew: true,
-              },
+              options: withAlphabeticalSort({ disableNew: true }),
             }),
           ],
           validation: (Rule) => [

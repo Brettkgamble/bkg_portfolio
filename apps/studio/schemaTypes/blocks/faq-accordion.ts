@@ -1,6 +1,8 @@
 import { MessageCircleQuestion } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const faqAccordion = defineType({
   name: "faqAccordion",
   type: "object",
@@ -61,7 +63,7 @@ export const faqAccordion = defineType({
         {
           type: "reference",
           to: [{ type: "faq" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         },
       ],
       validation: (Rule) => [Rule.required(), Rule.unique()],

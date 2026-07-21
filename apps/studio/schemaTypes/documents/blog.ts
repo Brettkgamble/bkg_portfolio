@@ -8,6 +8,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { PathnameFieldComponent } from "../../components/slug-field-component";
 import { GROUP, GROUPS } from "../../utils/constant";
 import { ogFields } from "../../utils/og-fields";
+import { withAlphabeticalSort } from "../../utils/reference-sort";
 import { seoFields } from "../../utils/seo-fields";
 import { createSlug, isUnique } from "../../utils/slug";
 import { createSlugValidator } from "../../utils/slug-validation";
@@ -80,7 +81,13 @@ export const blog = defineType({
     defineField({
       name: "categories",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "category" }] }],
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "category" }],
+          options: withAlphabeticalSort({}, "name"),
+        },
+      ],
     }),
     defineField({
       name: "authors",
@@ -98,9 +105,7 @@ export const blog = defineType({
               },
             },
           ],
-          options: {
-            disableNew: true,
-          },
+          options: withAlphabeticalSort({ disableNew: true }, "name"),
         }),
       ],
       validation: (Rule) => [
@@ -121,7 +126,7 @@ export const blog = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "certificate" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
       group: GROUP.MAIN_CONTENT,

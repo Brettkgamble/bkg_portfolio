@@ -1,6 +1,8 @@
 import { CaseIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 export const experienceBlock = defineType({
   name: "experienceBlock",
   title: "Work Experience",
@@ -24,7 +26,7 @@ export const experienceBlock = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "workExperience" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
       validation: (Rule) =>

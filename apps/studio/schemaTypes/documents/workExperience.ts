@@ -1,6 +1,8 @@
 import { CaseIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 const ROLE_STATUS = [
   { title: "Current", value: "current" },
   { title: "Completed", value: "completed" },
@@ -28,7 +30,7 @@ export const workExperience = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "organization" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
       validation: (Rule) =>
@@ -129,7 +131,7 @@ export const workExperience = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "skills" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
     }),

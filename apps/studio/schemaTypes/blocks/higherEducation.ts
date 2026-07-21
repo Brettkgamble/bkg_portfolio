@@ -1,6 +1,8 @@
 import { BookIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 const CREDENTIAL_TYPES = [
   { title: "Formal degree", value: "formal_degree" },
   { title: "Graduate certificate", value: "graduate_certificate" },
@@ -42,7 +44,7 @@ export const higherEducation = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "organization" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
       validation: (Rule) =>
@@ -58,7 +60,7 @@ export const higherEducation = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "organization" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
       validation: (Rule) => Rule.max(1).error("Select at most one accrediting organization"),
@@ -155,7 +157,7 @@ export const higherEducation = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "higherEducation" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
       hidden: ({ parent }) => parent?.entryType !== "coursework",
@@ -186,7 +188,7 @@ export const higherEducation = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "blog" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
     }),
@@ -199,7 +201,7 @@ export const higherEducation = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "certificate" }],
-          options: { disableNew: true },
+          options: withAlphabeticalSort({ disableNew: true }),
         }),
       ],
     }),

@@ -1,6 +1,8 @@
 import { DocumentIcon, ImageIcon, LinkIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { withAlphabeticalSort } from "../../utils/reference-sort";
+
 const richTextMembers = [
   defineArrayMember({
     name: "block",
@@ -67,7 +69,7 @@ const richTextMembers = [
         type: "reference",
         description: "Certificate to insert into the article",
         to: [{ type: "certificate" }],
-        options: { disableNew: true },
+        options: withAlphabeticalSort({ disableNew: true }),
         validation: (Rule) =>
           Rule.required().error("Select a certificate to insert"),
       }),

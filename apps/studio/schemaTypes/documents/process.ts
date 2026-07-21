@@ -2,6 +2,7 @@ import { ClockIcon } from "lucide-react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { GROUP, GROUPS } from "../../utils/constant";
+import { withAlphabeticalSort } from "../../utils/reference-sort";
 
 export const process = defineType({
   name: "process",
@@ -78,6 +79,7 @@ export const process = defineType({
         defineArrayMember({
           type: "reference",
           to: [{ type: "metals" }],
+          options: withAlphabeticalSort({}, "name"),
         }),
       ],
       validation: (Rule) => 

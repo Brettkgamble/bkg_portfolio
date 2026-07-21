@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 
 import { createRadioListLayout, isValidUrl } from "../../utils/helper";
+import { withAlphabeticalSort } from "../../utils/reference-sort";
 
 const allLinkableTypes = [
   { type: "blog" },
@@ -64,7 +65,7 @@ export const customUrl = defineType({
       type: "reference",
       description:
         "Select which page on your website this link should point to",
-      options: { disableNew: true },
+      options: withAlphabeticalSort({ disableNew: true }),
       hidden: ({ parent }) => parent?.type !== "internal",
       to: allLinkableTypes,
       validation: (rule) => [
